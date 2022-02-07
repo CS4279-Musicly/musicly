@@ -1,5 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:musicly/utilities/styles.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+// The correct login passwords
+const String CORRECT_PASSWORD = "vandy";
+const String CONDUCTOR_PASSWORD = "Vandy";
 
 /// Manages dynamic state for the Login class.
 class LoginView extends StatefulWidget {
@@ -12,6 +17,82 @@ class LoginView extends StatefulWidget {
 
 /// Creates and manages the Login screen.
 class _LoginViewState extends State<LoginView> {
+
+  String _password = "";
+  bool _firstLaunch = false; // First time launching the app?
+
+  /// Called on view load to initialize the view.
+  @override
+  void initState() {
+    super.initState();
+    _setup();
+  }
+
+  /// Asynchronously access the phone preferences on view load to grab data.
+  _setup() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    _firstLaunch = prefs.getBool('firstLaunch') ?? true;
+    if (_firstLaunch) {
+      prefs.setBool('firstLaunch', false);
+    }
+  }
+
+  /// Validate password when submitted to determine which view to load.
+  _validatePassword() {
+    if (_password == CORRECT_PASSWORD) {
+      if (_firstLaunch) {
+        Navigator.push(
+            context,
+            CupertinoPageRoute(builder: (_) => AccountView(first: _firstLaunch)
+            ));
+      } else {
+        Navigator.push(
+            context,
+            CupertinoPageRoute(builder: (_) => TabView()
+            ));
+      }
+    } else if (_password == CONDUCTOR_PASSWORD) {
+      Client.master = true;
+      if (_firstLaunch) {
+        Navigator.push(
+            context,
+            CupertinoPageRoute(builder: (_) => AccountView(
+                conductor: true,
+                first: _firstLaunch
+            )));
+      } else {
+        Navigator.push(
+            context,
+            CupertinoPageRoute(builder: (_) => TabView(conductor: true)
+            ));
+      }
+    } else {
+      _showDialog(context);
+    }
+  }
+
+  /// Shows a pop up error box when the incorrect password is entered.
+  _showDialog(BuildContext context) {
+    CupertinoAlertDialog alert = CupertinoAlertDialog(
+      content: Text('Error: Incorrect Password'),
+      actions: [
+        CupertinoDialogAction(
+          child: Text('OK'),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ],
+    );
+
+    return showCupertinoDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
 
   /// Builds the UI using widgets.
   @override
