@@ -42,30 +42,30 @@ class _LoginViewState extends State<LoginView> {
   _validatePassword() {
     if (_password == CORRECT_PASSWORD) {
       if (_firstLaunch) {
-        Navigator.push(
-            context,
-            CupertinoPageRoute(builder: (_) => AccountView(first: _firstLaunch)
-            ));
+        // Navigator.push(
+        //     context,
+        //     CupertinoPageRoute(builder: (_) => AccountView(first: _firstLaunch)
+        //     ));
       } else {
-        Navigator.push(
-            context,
-            CupertinoPageRoute(builder: (_) => TabView()
-            ));
+        // Navigator.push(
+        //     context,
+        //     CupertinoPageRoute(builder: (_) => TabView()
+        //     ));
       }
     } else if (_password == CONDUCTOR_PASSWORD) {
-      Client.master = true;
+      // Client.master = true;
       if (_firstLaunch) {
-        Navigator.push(
-            context,
-            CupertinoPageRoute(builder: (_) => AccountView(
-                conductor: true,
-                first: _firstLaunch
-            )));
+        // Navigator.push(
+        //     context,
+        //     CupertinoPageRoute(builder: (_) => AccountView(
+        //         conductor: true,
+        //         first: _firstLaunch
+        //     )));
       } else {
-        Navigator.push(
-            context,
-            CupertinoPageRoute(builder: (_) => TabView(conductor: true)
-            ));
+        // Navigator.push(
+        //     context,
+        //     CupertinoPageRoute(builder: (_) => TabView(conductor: true)
+        //     ));
       }
     } else {
       _showDialog(context);
@@ -75,10 +75,10 @@ class _LoginViewState extends State<LoginView> {
   /// Shows a pop up error box when the incorrect password is entered.
   _showDialog(BuildContext context) {
     CupertinoAlertDialog alert = CupertinoAlertDialog(
-      content: Text('Error: Incorrect Password'),
+      content: const Text('Error: Incorrect Password'),
       actions: [
         CupertinoDialogAction(
-          child: Text('OK'),
+          child: const Text('OK'),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -136,8 +136,10 @@ class _LoginViewState extends State<LoginView> {
                   borderRadius: BorderRadius.circular(25.0),
                 ),
                 onChanged: (text) {
+                  _password = text;
                 },
                 onSubmitted: (text) {
+                  _validatePassword();
                 },
               ),
             ),
@@ -151,6 +153,7 @@ class _LoginViewState extends State<LoginView> {
                   style: VanderbiltStyles.textButton,
                 ),
                 onPressed: () {
+                  _validatePassword();
                 },
                 borderRadius: BorderRadius.circular(25.0),
                 color: VanderbiltStyles.gold,
