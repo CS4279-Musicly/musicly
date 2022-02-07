@@ -53,6 +53,16 @@ class _LoginViewState extends State<LoginView> {
                   )
               )
           ),
+          // Create the Star V image.
+          Padding(
+            padding: const EdgeInsets.only(top: 50.0),
+            child: Center(
+              child: SizedBox(
+                  width: 200,
+                  height: 150,
+                  child: Image.asset('assets/images/starV_873.png')),
+            ),
+          ),
           // Create the password text box.
           Padding(
             padding: const EdgeInsets.only(
