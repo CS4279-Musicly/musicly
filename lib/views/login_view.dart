@@ -44,12 +44,12 @@ class _LoginViewState extends State<LoginView> {
     if (_password == CORRECT_PASSWORD) {
       Navigator.push(
           context,
-          CupertinoPageRoute(builder: (_) => TabView()
+          CupertinoPageRoute(builder: (_) => const TabView()
           ));
     } else if (_password == CONDUCTOR_PASSWORD) {
       Navigator.push(
           context,
-          CupertinoPageRoute(builder: (_) => TabView(conductor: true)
+          CupertinoPageRoute(builder: (_) => const TabView(conductor: true)
           ));
     } else {
       _showDialog(context);
