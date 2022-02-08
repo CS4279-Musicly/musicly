@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'home_view.dart';
 import 'package:musicly/utilities/styles.dart';

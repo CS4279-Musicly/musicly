@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:musicly/utilities/styles.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'tab_view.dart';
 
 // The correct login passwords
 const String CORRECT_PASSWORD = "vandy";
@@ -41,32 +42,15 @@ class _LoginViewState extends State<LoginView> {
   /// Validate password when submitted to determine which view to load.
   _validatePassword() {
     if (_password == CORRECT_PASSWORD) {
-      if (_firstLaunch) {
-        // Navigator.push(
-        //     context,
-        //     CupertinoPageRoute(builder: (_) => AccountView(first: _firstLaunch)
-        //     ));
-      } else {
-        // Navigator.push(
-        //     context,
-        //     CupertinoPageRoute(builder: (_) => TabView()
-        //     ));
-      }
+      Navigator.push(
+          context,
+          CupertinoPageRoute(builder: (_) => TabView()
+          ));
     } else if (_password == CONDUCTOR_PASSWORD) {
-      // Client.master = true;
-      if (_firstLaunch) {
-        // Navigator.push(
-        //     context,
-        //     CupertinoPageRoute(builder: (_) => AccountView(
-        //         conductor: true,
-        //         first: _firstLaunch
-        //     )));
-      } else {
-        // Navigator.push(
-        //     context,
-        //     CupertinoPageRoute(builder: (_) => TabView(conductor: true)
-        //     ));
-      }
+      Navigator.push(
+          context,
+          CupertinoPageRoute(builder: (_) => TabView(conductor: true)
+          ));
     } else {
       _showDialog(context);
     }
