@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-/// Class to hold all of the custom styles.
+/// Class to hold all of the custom styles for Vanderbilt.
 abstract class VanderbiltStyles {
   // Official Vanderbilt gold.
   static const Color gold = Color.fromRGBO(216, 171, 76, 1);
@@ -30,4 +30,10 @@ abstract class VanderbiltStyles {
       fontSize: 25,
       fontWeight: FontWeight.bold,
   );
+}
+
+/// Class to hold all of the custom styles for Northwestern
+abstract class NorthwesternStyles {
+  // Official Northwestern Purple.
+  static const Color purple = Color.fromRGBO(78, 42, 132, 1);
 }
