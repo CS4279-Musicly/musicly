@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:musicly/utilities/styles.dart';
+import '../upload_pdf.dart';
 
 /// Creates and manages the Home screen.
 class HomeView extends StatefulWidget {
@@ -47,9 +49,24 @@ class _HomeViewState extends State<HomeView> {
     return CupertinoPageScaffold(
         child: CustomScrollView(
           physics: const NeverScrollableScrollPhysics(),
-          slivers: [
+          slivers: <Widget>[
             // Navigation bar at the top of the screen that contains the view title and navigation buttons.
             _buildBar(context),
+            SliverAppBar(
+              bottom: PreferredSize(
+                preferredSize: const Size.fromHeight(0.0),
+                child: Transform.translate(
+                  offset: const Offset(0, 24.0),
+                  child: RaisedButton(
+                    shape: StadiumBorder(),
+                    child: Text("Upload PDFs"),
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=> UploadPDF()));
+                    },
+                  ),
+                ),
+              ),
+            ),
           ],
         )
     );

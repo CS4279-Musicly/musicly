@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'views/login_view.dart';
 
 /// Called initially to start the app.
@@ -13,6 +14,11 @@ class Musicly extends StatelessWidget {
   Widget build(BuildContext context) {
     // Cupertino App is the iOS-style app flutter offers and acts as the root of the app
     return const CupertinoApp(
+      localizationsDelegates: <LocalizationsDelegate<dynamic>>[
+        DefaultMaterialLocalizations.delegate,
+        DefaultWidgetsLocalizations.delegate,
+        DefaultCupertinoLocalizations.delegate,
+      ],
       title: 'Musicly',
       theme: CupertinoThemeData(
         brightness: Brightness.dark,
