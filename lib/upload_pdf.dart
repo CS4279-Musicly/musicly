@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_document_picker/flutter_document_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:file_picker/file_picker.dart';
 
 class UploadPDF extends StatelessWidget {
   Future<firebase_storage.UploadTask> uploadFile(File file) async {
@@ -28,6 +29,20 @@ class UploadPDF extends StatelessWidget {
     return Future.value(uploadTask);
   }
 
+  _getFiles(BuildContext context) async {
+    File file;
+    FilePickerResult result = await FilePicker.platform.pickFiles(
+        type: FileType.custom, allowedExtensions: ['pdf']);
+
+    if(result != null) {
+      file = File(result.files.first.path);
+    }
+
+    print(result.files.first.path);
+    firebase_storage.UploadTask task = await uploadFile(file);
+    Navigator.pop(context);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,12 +51,13 @@ class UploadPDF extends StatelessWidget {
           child: Text(
             'Select File'
           ),
-          onPressed: () async {
-            final path = await FlutterDocumentPicker.openDocument();
-            print(path);
-            File file = File(path);
-            firebase_storage.UploadTask task = await uploadFile(file);
-            Navigator.pop(context);
+          onPressed: () /*async*/ {
+            _getFiles(context);
+            // final path = await FlutterDocumentPicker.openDocument();
+            // print(path);
+            // File file = File(path);
+            // firebase_storage.UploadTask task = await uploadFile(file);
+            // Navigator.pop(context);
           },
         )
       )
