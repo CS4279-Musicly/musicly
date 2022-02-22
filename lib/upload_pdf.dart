@@ -30,16 +30,16 @@ class UploadPDF extends StatelessWidget {
   }
 
   _getFiles(BuildContext context) async {
-    File file;
-    FilePickerResult result = await FilePicker.platform.pickFiles(
+    File? file;
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
         type: FileType.custom, allowedExtensions: ['pdf']);
 
     if(result != null) {
-      file = File(result.files.first.path);
+      file = File(result.files.first.path!);
     }
 
-    print(result.files.first.path);
-    firebase_storage.UploadTask task = await uploadFile(file);
+    print(result?.files.first.path);
+    firebase_storage.UploadTask task = await uploadFile(file!);
     Navigator.pop(context);
   }
 
