@@ -35,10 +35,11 @@ class UploadPDF extends StatelessWidget {
         type: FileType.custom, allowedExtensions: ['pdf']);
 
     if(result != null) {
-      file = File(result.files.first.path!);
+      file = File.fromRawPath(result.files.first.bytes!);
     }
 
-    print(result?.files.first.path);
+    //print("HERE");
+    //print(result?.files.first.path);
     firebase_storage.UploadTask task = await uploadFile(file!);
     Navigator.pop(context);
   }
@@ -51,7 +52,7 @@ class UploadPDF extends StatelessWidget {
           child: Text(
             'Select File'
           ),
-          onPressed: () /*async*/ {
+          onPressed: () /*async*/ async {
             _getFiles(context);
             // final path = await FlutterDocumentPicker.openDocument();
             // print(path);
