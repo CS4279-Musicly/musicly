@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:musicly/utilities/styles.dart';
 import 'add_music_view.dart';
+import 'package:musicly/upload_pdf.dart';
 
 /// Creates and manages the Home screen.
 class HomeView extends StatefulWidget {
@@ -70,7 +71,25 @@ class _HomeViewState extends State<HomeView> {
     } else {
       return Column(
         children: [
-
+          Padding(
+            padding: const EdgeInsets.only(
+                left: 0, right: 0, top: 35.0, bottom: 0),
+            child: SizedBox(
+              width: 370,
+              child: CupertinoButton(
+                child: const Text(
+                  'Download New Music',
+                  style: VanderbiltStyles.textButton,
+                ),
+                onPressed: () {
+                  UploadPDF().downloadFile();
+                },
+                borderRadius: BorderRadius.circular(25.0),
+                color: VanderbiltStyles.gold,
+                pressedOpacity: 0.75,
+              ),
+            ),
+          ),
         ],
       );
     }

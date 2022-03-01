@@ -76,6 +76,7 @@ class _AddMusicViewState extends State<AddMusicView> {
                         color: CupertinoColors.white,
                         onPressed: () async {
                           file = await UploadPDF().getFiles();
+                          _fileName = file!.uri.pathSegments.last;
                         },
                       ),
                     )

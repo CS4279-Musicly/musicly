@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:path_provider/path_provider.dart';
 
 class UploadPDF {
 
@@ -62,5 +63,18 @@ class UploadPDF {
         return alert;
       },
     );
+  }
+
+  Future<void> downloadFile() async {
+    Directory appDocDir = await getApplicationDocumentsDirectory();
+    File downloadToFile = File('${appDocDir.path}/Dynamite.pdf');
+
+    try {
+      await firebase_storage.FirebaseStorage.instance
+          .ref('uploads/Dynamite_2019-Scr.pdf')
+          .writeToFile(downloadToFile);
+    } on firebase_storage.FirebaseException catch (e) {
+      // e.g, e.code == 'canceled'
+    }
   }
 }
