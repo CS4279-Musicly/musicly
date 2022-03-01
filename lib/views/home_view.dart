@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:musicly/utilities/styles.dart';
-import '../upload_pdf.dart';
+import 'add_music_view.dart';
 
 /// Creates and manages the Home screen.
 class HomeView extends StatefulWidget {
@@ -57,7 +57,7 @@ class _HomeViewState extends State<HomeView> {
                   style: VanderbiltStyles.textButton,
                 ),
                 onPressed: () {
-                  Navigator.push(context, CupertinoPageRoute(builder: (context)=> UploadPDF()));
+                  Navigator.push(context, CupertinoPageRoute(builder: (context) => AddMusicView()));
                 },
                 borderRadius: BorderRadius.circular(25.0),
                 color: VanderbiltStyles.gold,
