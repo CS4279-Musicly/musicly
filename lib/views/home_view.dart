@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:musicly/utilities/styles.dart';
 import '../upload_pdf.dart';
 
@@ -43,6 +42,40 @@ class _HomeViewState extends State<HomeView> {
     }
   }
 
+  Column _buildColumn(BuildContext context) {
+    if (conductor) {
+      return Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(
+                left: 0, right: 0, top: 35.0, bottom: 0),
+            child: SizedBox(
+              width: 370,
+              child: CupertinoButton(
+                child: const Text(
+                  'Add New Sheet Music',
+                  style: VanderbiltStyles.textButton,
+                ),
+                onPressed: () {
+                  Navigator.push(context, CupertinoPageRoute(builder: (context)=> UploadPDF()));
+                },
+                borderRadius: BorderRadius.circular(25.0),
+                color: VanderbiltStyles.gold,
+                pressedOpacity: 0.75,
+              ),
+            ),
+          ),
+        ]
+      );
+    } else {
+      return Column(
+        children: [
+
+        ],
+      );
+    }
+  }
+
   /// Builds the UI using widgets.
   @override
   Widget build(BuildContext context) {
@@ -52,21 +85,9 @@ class _HomeViewState extends State<HomeView> {
           slivers: <Widget>[
             // Navigation bar at the top of the screen that contains the view title and navigation buttons.
             _buildBar(context),
-            SliverAppBar(
-              bottom: PreferredSize(
-                preferredSize: const Size.fromHeight(0.0),
-                child: Transform.translate(
-                  offset: const Offset(0, 24.0),
-                  child: RaisedButton(
-                    shape: StadiumBorder(),
-                    child: Text("Upload PDFs"),
-                    onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=> UploadPDF()));
-                    },
-                  ),
-                ),
-              ),
-            ),
+            SliverFillRemaining(
+              child: _buildColumn(context)
+            )
           ],
         )
     );
