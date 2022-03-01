@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:musicly/utilities/styles.dart';
 import 'add_music_view.dart';
-import 'package:musicly/upload_pdf.dart';
+import 'package:musicly/utilities/firebase_files.dart';
 
 /// Creates and manages the Home screen.
 class HomeView extends StatefulWidget {
@@ -82,7 +82,7 @@ class _HomeViewState extends State<HomeView> {
                   style: VanderbiltStyles.textButton,
                 ),
                 onPressed: () {
-                  UploadPDF().downloadFile();
+                  FirebaseFiles().downloadFile();
                 },
                 borderRadius: BorderRadius.circular(25.0),
                 color: VanderbiltStyles.gold,

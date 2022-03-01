@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:musicly/utilities/styles.dart';
 import 'dart:io';
-import 'package:musicly/upload_pdf.dart';
+import 'package:musicly/utilities/firebase_files.dart';
 
 class AddMusicView extends StatefulWidget {
   AddMusicView({Key? key}) : super(key: key);
@@ -75,7 +75,7 @@ class _AddMusicViewState extends State<AddMusicView> {
                         borderRadius: BorderRadius.circular(25.0),
                         color: CupertinoColors.white,
                         onPressed: () async {
-                          file = await UploadPDF().getFiles();
+                          file = await FirebaseFiles().getFiles();
                           _fileName = file!.uri.pathSegments.last;
                         },
                       ),
@@ -91,9 +91,9 @@ class _AddMusicViewState extends State<AddMusicView> {
                     ),
                     onPressed: () async {
                       if (file == null) {
-                        UploadPDF().noSelectionDialog(context);
+                        FirebaseFiles().noSelectionDialog(context);
                       } else {
-                        UploadPDF().uploadFile(file!);
+                        FirebaseFiles().uploadFile(file!);
                       }
                     },
                     borderRadius: BorderRadius.circular(25.0),
