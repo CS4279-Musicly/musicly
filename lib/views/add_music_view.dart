@@ -16,7 +16,7 @@ class _AddMusicViewState extends State<AddMusicView> {
 
   String _songName = "Song Name";
   String _fileName = "Select PDF";
-  late Future<File?> file;
+  File? file = null;
 
   @override
   Widget build(BuildContext context) {
@@ -74,8 +74,8 @@ class _AddMusicViewState extends State<AddMusicView> {
                         ),
                         borderRadius: BorderRadius.circular(25.0),
                         color: CupertinoColors.white,
-                        onPressed: () {
-                          file = UploadPDF().getFiles();
+                        onPressed: () async {
+                          file = UploadPDF().getFiles() as File?;
                         },
                       ),
                     )
@@ -89,7 +89,11 @@ class _AddMusicViewState extends State<AddMusicView> {
                       style: VanderbiltStyles.textButton,
                     ),
                     onPressed: () async {
-                      UploadPDF().uploadFile(file as File);
+                      if (file == null) {
+                        UploadPDF().noSelectionDialog(context);
+                      } else {
+                        UploadPDF().uploadFile(file as File);
+                      }
                     },
                     borderRadius: BorderRadius.circular(25.0),
                     color: VanderbiltStyles.gold,

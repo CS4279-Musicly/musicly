@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/cupertino.dart';
 
 class UploadPDF {
 
@@ -38,5 +39,28 @@ class UploadPDF {
     //print(result?.files.first.path);
     //firebase_storage.UploadTask task = await uploadFile(file!);
     return file;
+  }
+
+  /// Shows a pop up error box when the incorrect password is entered.
+  noSelectionDialog(BuildContext context) {
+    CupertinoAlertDialog alert = CupertinoAlertDialog(
+      content: const Text('Error: Please Select a File'),
+      actions: [
+        CupertinoDialogAction(
+          child: const Text('OK'),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ],
+    );
+
+    return showCupertinoDialog(
+      context: context,
+      useRootNavigator: false,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
   }
 }
