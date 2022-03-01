@@ -95,6 +95,7 @@ class _AddMusicViewState extends State<AddMusicView> {
                       } else {
                         FirebaseFiles().uploadFile(file!);
                       }
+                      Navigator.pop(context);
                     },
                     borderRadius: BorderRadius.circular(25.0),
                     color: VanderbiltStyles.gold,

@@ -71,7 +71,7 @@ class FirebaseFiles {
 
     try {
       await firebase_storage.FirebaseStorage.instance
-          .ref('uploads/Dynamite_2019-Scr.pdf')
+          .ref('files/Dynamite_2019-Scr.pdf')
           .writeToFile(downloadToFile);
     } on firebase_storage.FirebaseException catch (e) {
       // e.g, e.code == 'canceled'

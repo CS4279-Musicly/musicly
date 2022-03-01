@@ -31,10 +31,10 @@
               "client_type": 3
             },
             {
-              "client_id": "48585516771-lv6lcejvgsrnf9mn6mst01bvo5cte5sr.apps.googleusercontent.com",
+              "client_id": "48585516771-do6enr9qtn7rcviv0o62b39aesqs0451.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "Y"
+                "bundle_id": "com.musicly"
               }
             }
           ]
