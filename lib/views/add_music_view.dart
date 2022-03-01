@@ -75,7 +75,7 @@ class _AddMusicViewState extends State<AddMusicView> {
                         borderRadius: BorderRadius.circular(25.0),
                         color: CupertinoColors.white,
                         onPressed: () async {
-                          file = UploadPDF().getFiles() as File?;
+                          file = await UploadPDF().getFiles();
                         },
                       ),
                     )
@@ -92,7 +92,7 @@ class _AddMusicViewState extends State<AddMusicView> {
                       if (file == null) {
                         UploadPDF().noSelectionDialog(context);
                       } else {
-                        UploadPDF().uploadFile(file as File);
+                        UploadPDF().uploadFile(file!);
                       }
                     },
                     borderRadius: BorderRadius.circular(25.0),

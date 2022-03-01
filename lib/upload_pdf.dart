@@ -32,7 +32,7 @@ class UploadPDF {
         type: FileType.custom, allowedExtensions: ['pdf']);
 
     if (result != null) {
-      file = File.fromRawPath(result.files.first.bytes!);
+      file = File(result.files.first.path!);
     }
 
     //print("HERE");
