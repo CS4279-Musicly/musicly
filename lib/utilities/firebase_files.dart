@@ -67,20 +67,20 @@ class FirebaseFiles {
     );
   }
 
-  Future<void> downloadFile(BuildContext context) async {
+  Future<void> downloadFile(BuildContext context, String name) async {
     Directory appDocDir = await getApplicationDocumentsDirectory();
-    File downloadToFile = File('${appDocDir.path}/DynamiteDownload.pdf');
+    File downloadToFile = File('${appDocDir.path}/$name.pdf');
 
     await firebase_storage.FirebaseStorage.instance
         .ref()
-        .child('files/Dynamite.pdf')
+        .child('files/$name.pdf')
         .writeToFile(downloadToFile);
 
     Navigator.push(
       context,
       CupertinoPageRoute(
         builder: (context) =>
-            PDFScreen(path: '${appDocDir.path}/DynamiteDownload.pdf'),
+            PDFScreen(path: '${appDocDir.path}/$name.pdf'),
       ),
     );
   }

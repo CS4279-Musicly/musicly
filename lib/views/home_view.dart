@@ -4,6 +4,7 @@ import 'package:musicly/utilities/firebase_files.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'add_music_view.dart';
 import 'account_view.dart';
+import 'download_music_view.dart';
 
 /// Creates and manages the Home screen.
 class HomeView extends StatefulWidget {
@@ -97,7 +98,8 @@ class _HomeViewState extends State<HomeView> {
                   style: VanderbiltStyles.textButton,
                 ),
                 onPressed: () {
-                  FirebaseFiles().downloadFile(context);
+                  Navigator.push(context, CupertinoPageRoute(builder: (context) => DownloadMusicView()));
+                  //FirebaseFiles().downloadFile(context);
                 },
                 borderRadius: BorderRadius.circular(25.0),
                 color: VanderbiltStyles.gold,
