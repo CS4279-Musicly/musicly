@@ -11,8 +11,8 @@ class Client {
     required this.port,
   });
 
-  String hostname;
-  int port = 4040;
+  String hostname = '10.0.2.2';
+  int port = 4044;
   Uint8ListCallback onData;
   DynamicCallback onError;
   bool connected = false;
@@ -21,7 +21,7 @@ class Client {
 
   connect() async {
     try {
-      socket = await Socket.connect(hostname, 4040);
+      socket = await Socket.connect(hostname, port);
       socket!.listen(
         onData,
         onError: onError,

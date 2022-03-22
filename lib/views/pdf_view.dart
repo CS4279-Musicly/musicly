@@ -41,8 +41,7 @@ class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
             pageSnap: true,
             defaultPage: currentPage!,
             fitPolicy: FitPolicy.BOTH,
-            preventLinkNavigation:
-            false, // if set to true the link is handled in flutter
+            preventLinkNavigation: false, // if set to true the link is handled in flutter
             onRender: (_pages) {
               setState(() {
                 pages = _pages;
@@ -74,9 +73,7 @@ class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
               });
             },
           ),
-          errorMessage.isEmpty
-              ? !isReady
-              ? const Center(
+          errorMessage.isEmpty ? !isReady ? const Center(
             child: CircularProgressIndicator(),
           )
               : Container()

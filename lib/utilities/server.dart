@@ -17,7 +17,7 @@ class Server {
 
   start() async {
     runZoned(() async {
-      server = await ServerSocket.bind('0.0.0.0', 4040);
+      server = await ServerSocket.bind('localhost', 4040);
       this.running = true;
       server!.listen(onRequest);
       this.onData(Uint8List.fromList('Server started on port 4040'.codeUnits));
