@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../utilities/server.dart';
+import '../utilities/styles.dart';
 
 class ServerPage extends StatefulWidget {
   @override
@@ -71,6 +72,8 @@ class _ServerPageState extends State<ServerPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Server'),
+        titleTextStyle: TextStyle(color: Colors.black, fontSize: 22),
+        backgroundColor: VanderbiltStyles.gold,
         centerTitle: true,
         automaticallyImplyLeading: false,
         leading: IconButton(

@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:musicly/utilities/styles.dart';
 import '../utilities/client.dart';
 
 class ClientPage extends StatefulWidget {
@@ -71,6 +72,9 @@ class _ClientPageState extends State<ClientPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Client'),
+        titleTextStyle: TextStyle(color: Colors.black, fontSize: 22),
+        backgroundColor: VanderbiltStyles.gold
+        ,
         centerTitle: true,
         automaticallyImplyLeading: false,
         leading: IconButton(
@@ -91,7 +95,7 @@ class _ClientPageState extends State<ClientPage> {
                     children: <Widget>[
                       Text(
                         "Client",
-                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Colors.black)
                       ),
                       Container(
                         decoration: BoxDecoration(
