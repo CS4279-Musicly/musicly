@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
-import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:path_provider/path_provider.dart';
@@ -8,8 +7,6 @@ import 'package:path_provider/path_provider.dart';
 class FirebaseFiles {
 
   Future<firebase_storage.UploadTask> uploadFile(File file) async {
-
-    FirebaseAppCheck appCheck = FirebaseAppCheck.instance;
 
     firebase_storage.UploadTask uploadTask;
 
