@@ -2,6 +2,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
 
+import '../utilities/styles.dart';
+
 class PDFScreen extends StatefulWidget {
   final String? path;
 
@@ -23,6 +25,8 @@ class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Document"),
+          titleTextStyle: TextStyle(color: Colors.black, fontSize: 22),
+          backgroundColor: VanderbiltStyles.gold,
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.share),
