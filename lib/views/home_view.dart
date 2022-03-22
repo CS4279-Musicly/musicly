@@ -97,7 +97,7 @@ class _HomeViewState extends State<HomeView> {
                   style: VanderbiltStyles.textButton,
                 ),
                 onPressed: () {
-                  FirebaseFiles().downloadFile();
+                  FirebaseFiles().downloadFile(context);
                 },
                 borderRadius: BorderRadius.circular(25.0),
                 color: VanderbiltStyles.gold,

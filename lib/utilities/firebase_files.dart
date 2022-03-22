@@ -3,6 +3,8 @@ import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:flutter_pdfview/flutter_pdfview.dart';
+import 'package:musicly/views/pdf_view.dart';
 
 class FirebaseFiles {
 
@@ -65,13 +67,21 @@ class FirebaseFiles {
     );
   }
 
-  Future<void> downloadFile() async {
+  Future<void> downloadFile(BuildContext context) async {
     Directory appDocDir = await getApplicationDocumentsDirectory();
     File downloadToFile = File('${appDocDir.path}/DynamiteDownload.pdf');
 
     await firebase_storage.FirebaseStorage.instance
         .ref()
-        .child('files/Dynamite')
+        .child('files/Dynamite.pdf')
         .writeToFile(downloadToFile);
+
+    Navigator.push(
+      context,
+      CupertinoPageRoute(
+        builder: (context) =>
+            PDFScreen(path: '${appDocDir.path}/DynamiteDownload.pdf'),
+      ),
+    );
   }
 }
