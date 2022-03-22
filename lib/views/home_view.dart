@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:musicly/utilities/styles.dart';
-import 'add_music_view.dart';
 import 'package:musicly/utilities/firebase_files.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'add_music_view.dart';
+import 'account_view.dart';
 
 /// Creates and manages the Home screen.
 class HomeView extends StatefulWidget {
@@ -33,11 +35,24 @@ class _HomeViewState extends State<HomeView> {
         ),
       );
     } else {
-      return const CupertinoSliverNavigationBar(
+      return CupertinoSliverNavigationBar(
         automaticallyImplyLeading: false,
-        largeTitle: Text(
+        largeTitle: const Text(
           'Home: Student',
           style: TextStyle(color: VanderbiltStyles.gold),
+        ),
+        // Right nav bar button, navigates to Account view.
+        trailing: CupertinoButton(
+            child: const Icon(CupertinoIcons.person),
+            padding: const EdgeInsets.all(10),
+            // Navigates to Account View when pressed.
+            onPressed: () {
+              showCupertinoModalBottomSheet(
+                  context: context,
+                  expand: true,
+                  duration: const Duration(milliseconds: 300),
+                  builder: (_) => AccountView(conductor: conductor));
+            }
         ),
       );
     }
