@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'tab_view.dart';
 import 'package:musicly/utilities/styles.dart';
-import 'home_view.dart';
 
 /// Manages dynamic state for the Account class.
 class AccountView extends StatefulWidget {
@@ -113,7 +112,7 @@ class _AccountViewState extends State<AccountView> {
     showCupertinoModalPopup(
         context: context,
         builder: (BuildContext context) {
-          return Container(
+          return SizedBox(
               height: 200,
               child: CupertinoPicker(
                 backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
@@ -136,7 +135,7 @@ class _AccountViewState extends State<AccountView> {
     showCupertinoModalPopup(
         context: context,
         builder: (BuildContext context) {
-          return Container(
+          return SizedBox(
             height: 200,
             child: CupertinoPicker(
               backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
@@ -161,7 +160,7 @@ class _AccountViewState extends State<AccountView> {
         Padding(
           padding: const EdgeInsets.only(top: 90.0),
           child: Center(
-            child: Container(
+            child: SizedBox(
                 width: 200,
                 height: 150,
                 child: Image.asset('assets/images/starV_873.png')),
@@ -199,7 +198,7 @@ class _AccountViewState extends State<AccountView> {
         Padding(
           padding: const EdgeInsets.only(top: 90.0),
           child: Center(
-            child: Container(
+            child: SizedBox(
                 width: 200,
                 height: 150,
                 child: Image.asset('assets/images/starV_873.png')),
