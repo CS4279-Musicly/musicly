@@ -14,7 +14,7 @@ class FirebaseFiles {
     firebase_storage.Reference ref = firebase_storage.FirebaseStorage.instance
         .ref()
         .child('files')
-        .child('/' + name);
+        .child('/' + name + '.pdf');
 
     final metadata = firebase_storage.SettableMetadata(
         contentType: 'file/pdf',
@@ -69,12 +69,9 @@ class FirebaseFiles {
     Directory appDocDir = await getApplicationDocumentsDirectory();
     File downloadToFile = File('${appDocDir.path}/DynamiteDownload.pdf');
 
-    try {
-      await firebase_storage.FirebaseStorage.instance
-          .ref('files/Dynamite')
-          .writeToFile(downloadToFile);
-    } on firebase_storage.FirebaseException catch (e) {
-      // e.g, e.code == 'canceled'
-    }
+    await firebase_storage.FirebaseStorage.instance
+        .ref()
+        .child('files/Dynamite')
+        .writeToFile(downloadToFile);
   }
 }
