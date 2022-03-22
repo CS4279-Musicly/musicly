@@ -93,7 +93,7 @@ class _AddMusicViewState extends State<AddMusicView> {
                       if (file == null) {
                         FirebaseFiles().noSelectionDialog(context);
                       } else {
-                        FirebaseFiles().uploadFile(file!);
+                        FirebaseFiles().uploadFile(file!, _songName);
                       }
                       Navigator.pop(context);
                     },

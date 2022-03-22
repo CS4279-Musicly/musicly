@@ -6,7 +6,7 @@ import 'package:path_provider/path_provider.dart';
 
 class FirebaseFiles {
 
-  Future<firebase_storage.UploadTask> uploadFile(File file) async {
+  Future<firebase_storage.UploadTask> uploadFile(File file, String name) async {
 
     firebase_storage.UploadTask uploadTask;
 
@@ -14,7 +14,7 @@ class FirebaseFiles {
     firebase_storage.Reference ref = firebase_storage.FirebaseStorage.instance
         .ref()
         .child('files')
-        .child('/some-file.pdf');
+        .child('/' + name);
 
     final metadata = firebase_storage.SettableMetadata(
         contentType: 'file/pdf',
@@ -67,11 +67,11 @@ class FirebaseFiles {
 
   Future<void> downloadFile() async {
     Directory appDocDir = await getApplicationDocumentsDirectory();
-    File downloadToFile = File('${appDocDir.path}/Dynamite.pdf');
+    File downloadToFile = File('${appDocDir.path}/DynamiteDownload.pdf');
 
     try {
       await firebase_storage.FirebaseStorage.instance
-          .ref('files/Dynamite_2019-Scr.pdf')
+          .ref('files/Dynamite')
           .writeToFile(downloadToFile);
     } on firebase_storage.FirebaseException catch (e) {
       // e.g, e.code == 'canceled'
