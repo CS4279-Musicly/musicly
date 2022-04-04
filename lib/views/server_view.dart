@@ -139,8 +139,7 @@ class _ServerPageState extends State<ServerPage> {
                         return Padding(
                           padding: EdgeInsets.only(top: 15),
                           child: Text(log),
-                        );
-                        
+                        ); 
                       }).toList(),
                     ),
                   ),
