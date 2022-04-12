@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'home_view.dart';
 import 'package:musicly/utilities/styles.dart';
+import 'music_file_view.dart';
+import 'drill_file_view.dart';
 
 // Global keys for the tab bar to navigate to the correct classes.
 GlobalKey<NavigatorState> firstTabNavKey = GlobalKey<NavigatorState>();
@@ -57,13 +59,13 @@ class _TabViewState extends State<TabView> {
           //MusicSongViewState(false).refreshData();
           return CupertinoTabView(
             navigatorKey: secondTabNavKey,
-            builder: (BuildContext context) => HomeView(),
+            builder: (BuildContext context) => MusicFileView(),
           );
         } else {
           // Navigate to Drill view.
           return CupertinoTabView(
             navigatorKey: thirdTabNavKey,
-            builder: (BuildContext context) => HomeView(),
+            builder: (BuildContext context) => DrillFileView(),
           );
         }
       },

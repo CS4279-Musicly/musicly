@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:musicly/views/pdf_view.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class FirebaseFiles {
 
@@ -69,19 +70,19 @@ class FirebaseFiles {
 
   Future<void> downloadFile(BuildContext context, String name) async {
     Directory appDocDir = await getApplicationDocumentsDirectory();
-    File downloadToFile = File('${appDocDir.path}/$name.pdf');
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    int? numFiles = prefs.getInt("numMusicFiles") ?? 0;
+    File downloadToFile = File('${appDocDir.path}/' + name + (numFiles).toString() +'.pdf');
 
     await firebase_storage.FirebaseStorage.instance
         .ref()
         .child('files/$name.pdf')
         .writeToFile(downloadToFile);
 
-    Navigator.push(
-      context,
-      CupertinoPageRoute(
-        builder: (context) =>
-            PDFScreen(path: '${appDocDir.path}/$name.pdf'),
-      ),
-    );
+    prefs.setInt("numMusicFiles", numFiles + 1);
+    prefs.setStringList(numFiles.toString(), [name, downloadToFile.path]);
+    print(numFiles);
+    print(downloadToFile.path);
   }
 }

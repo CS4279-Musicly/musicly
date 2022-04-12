@@ -16,6 +16,11 @@ class _DownloadMusicViewState extends State<DownloadMusicView> {
 
   String _songName = "File Name";
 
+  _getFile(BuildContext context) async {
+    await FirebaseFiles().downloadFile(context, _songName);
+    Navigator.pop(context);
+  }
+
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
@@ -56,6 +61,7 @@ class _DownloadMusicViewState extends State<DownloadMusicView> {
                               },
                               onSubmitted: (text) {
                                 _songName = text;
+                                _getFile(context);
                               },
                             ),
                           )
@@ -69,8 +75,7 @@ class _DownloadMusicViewState extends State<DownloadMusicView> {
                             style: VanderbiltStyles.textButton,
                           ),
                           onPressed: () async {
-                            FirebaseFiles().downloadFile(context, _songName);
-                            //Navigator.pop(context);
+                            _getFile(context);
                           },
                           borderRadius: BorderRadius.circular(25.0),
                           color: VanderbiltStyles.gold,
