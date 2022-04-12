@@ -4,6 +4,7 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'add_music_view.dart';
 import 'account_view.dart';
 import 'download_music_view.dart';
+import 'download_drill_view.dart';
 import 'client_view.dart';
 import 'server_view.dart';
 
@@ -138,6 +139,26 @@ class _HomeViewState extends State<HomeView> {
                 ),
                 onPressed: () {
                   Navigator.push(context, CupertinoPageRoute(builder: (context) => DownloadMusicView()));
+                  //FirebaseFiles().downloadFile(context);
+                },
+                borderRadius: BorderRadius.circular(25.0),
+                color: VanderbiltStyles.gold,
+                pressedOpacity: 0.75,
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(
+                left: 0, right: 0, top: 35.0, bottom: 0),
+            child: SizedBox(
+              width: 370,
+              child: CupertinoButton(
+                child: const Text(
+                  'Download New Drill',
+                  style: VanderbiltStyles.textButton,
+                ),
+                onPressed: () {
+                  Navigator.push(context, CupertinoPageRoute(builder: (context) => DownloadDrillView()));
                   //FirebaseFiles().downloadFile(context);
                 },
                 borderRadius: BorderRadius.circular(25.0),

@@ -68,7 +68,7 @@ class FirebaseFiles {
     );
   }
 
-  Future<void> downloadFile(BuildContext context, String name) async {
+  Future<void> downloadMusicFile(BuildContext context, String name) async {
     Directory appDocDir = await getApplicationDocumentsDirectory();
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -82,7 +82,21 @@ class FirebaseFiles {
 
     prefs.setInt("numMusicFiles", numFiles + 1);
     prefs.setStringList(numFiles.toString(), [name, downloadToFile.path]);
-    print(numFiles);
-    print(downloadToFile.path);
+  }
+
+  Future<void> downloadDrillFile(BuildContext context, String name) async {
+    Directory appDocDir = await getApplicationDocumentsDirectory();
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    int? numFiles = prefs.getInt("numDrillFiles") ?? 0;
+    File downloadToFile = File('${appDocDir.path}/' + name + (numFiles).toString() +'.pdf');
+
+    await firebase_storage.FirebaseStorage.instance
+        .ref()
+        .child('files/$name.pdf')
+        .writeToFile(downloadToFile);
+
+    prefs.setInt("numDrillFiles", numFiles + 1);
+    prefs.setStringList(numFiles.toString(), [name, downloadToFile.path]);
   }
 }

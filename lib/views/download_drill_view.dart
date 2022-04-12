@@ -3,21 +3,21 @@ import 'package:musicly/utilities/styles.dart';
 import 'dart:io';
 import 'package:musicly/utilities/firebase_files.dart';
 
-class DownloadMusicView extends StatefulWidget {
-  DownloadMusicView({Key? key}) : super(key: key);
+class DownloadDrillView extends StatefulWidget {
+  DownloadDrillView({Key? key}) : super(key: key);
 
   /// Creates the dynamic state for the Add Music class.
   @override
-  _DownloadMusicViewState createState() => _DownloadMusicViewState();
+  _DownloadDrillViewState createState() => _DownloadDrillViewState();
 }
 
 /// Creates and manages the Account screen.
-class _DownloadMusicViewState extends State<DownloadMusicView> {
+class _DownloadDrillViewState extends State<DownloadDrillView> {
 
   String _songName = "File Name";
 
   _getFile(BuildContext context) async {
-    await FirebaseFiles().downloadMusicFile(context, _songName);
+    await FirebaseFiles().downloadDrillFile(context, _songName);
     Navigator.pop(context);
   }
 
@@ -30,7 +30,7 @@ class _DownloadMusicViewState extends State<DownloadMusicView> {
             // Navigation bar at the top of the screen that contains the view title and navigation buttons.
             const CupertinoSliverNavigationBar(
               largeTitle: Text(
-                'Download Music',
+                'Download Drill',
                 style: TextStyle(color: VanderbiltStyles.gold),
               ),
               previousPageTitle: "Home",
