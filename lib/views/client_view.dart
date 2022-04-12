@@ -52,13 +52,13 @@ class _ClientPageState extends State<ClientPage> {
             FlatButton(
               child: Text("Leave", style: TextStyle(color: Colors.red)),
               onPressed: () {
-                Navigator.of(context).pop();
-                Navigator.of(context).pop();
+                Navigator.pop(context);
+                Navigator.pop(context);
               },
             ),FlatButton(
               child: Text("Cancel", style: TextStyle(color: Colors.grey)),
               onPressed: () {
-                Navigator.of(context).pop();
+                Navigator.pop(context);
               },
             ),
           ],
