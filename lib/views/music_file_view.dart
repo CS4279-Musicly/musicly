@@ -88,7 +88,7 @@ class _MusicFileViewState extends State<MusicFileView> {
                                     )
                                 ),
                                 child: Padding(
-                                  padding: const EdgeInsets.only(top: 175.0),
+                                  padding: const EdgeInsets.only(top: 150.0),
                                   child: Text(prefs.getStringList((index).toString())?[0] ?? ""),
                                 )
                             ),
