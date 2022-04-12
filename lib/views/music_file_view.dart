@@ -70,7 +70,7 @@ class _MusicFileViewState extends State<MusicFileView> {
                     maxCrossAxisExtent: 200.0,
                     mainAxisSpacing: 10.0,
                     crossAxisSpacing: 30.0,
-                    childAspectRatio: 3 / 3,
+                    childAspectRatio: 9 / 10,
                   ),
                   delegate: SliverChildBuilderDelegate((BuildContext context, int index) {
                       if (id == -2) {
@@ -88,7 +88,7 @@ class _MusicFileViewState extends State<MusicFileView> {
                                     )
                                 ),
                                 child: Padding(
-                                  padding: const EdgeInsets.only(top: 155.0),
+                                  padding: const EdgeInsets.only(top: 175.0),
                                   child: Text(prefs.getStringList((index).toString())?[0] ?? ""),
                                 )
                             ),
