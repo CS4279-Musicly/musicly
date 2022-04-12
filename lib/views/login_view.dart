@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:musicly/utilities/styles.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'tab_view.dart';
+import 'signup_view.dart';
 
 /// Manages dynamic state for the Login class.
 class LoginView extends StatefulWidget {
@@ -44,7 +46,7 @@ class _LoginViewState extends State<LoginView> {
   _validatePassword() async {
     bool _validated = true;
     try {
-      UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+      UserCredential userCredential = await auth.signInWithEmailAndPassword(
           email: _email,
           password: _password
       );
@@ -71,7 +73,7 @@ class _LoginViewState extends State<LoginView> {
 
   _signUp() async {
     try {
-      UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      UserCredential userCredential = await auth.createUserWithEmailAndPassword(
           email: _email,
           password: _password
       );
@@ -150,16 +152,20 @@ class _LoginViewState extends State<LoginView> {
   Widget _buildSignUp() {
     return Padding(
       padding: const EdgeInsets.only(
-          left: 30.0, right: 30.0, top: 25.0, bottom: 0),
+          left: 75.0, right: 75.0, top: 25.0, bottom: 0),
       child: CupertinoButton(
         child: const Text(
           'Sign Up',
           style: VanderbiltStyles.textButton,
         ),
         onPressed: () {
-          _signUp();
+          showCupertinoModalBottomSheet(
+              context: context,
+              expand: true,
+              duration: const Duration(milliseconds: 300),
+              builder: (_) => SignupView());
         },
-        borderRadius: BorderRadius.circular(15.0),
+        borderRadius: BorderRadius.circular(25.0),
         color: VanderbiltStyles.darkerGold,
         pressedOpacity: 0.75,
       ),
