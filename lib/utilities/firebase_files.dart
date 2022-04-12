@@ -3,8 +3,6 @@ import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:flutter_pdfview/flutter_pdfview.dart';
-import 'package:musicly/views/pdf_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class FirebaseFiles {
