@@ -39,6 +39,7 @@ class _AccountViewState extends State<AccountView> {
     Text('Nashville Tech', style: VanderbiltStyles.textRow),
     Text('Vanderbilt', style: VanderbiltStyles.textRow),
     Text('Vol. State', style: VanderbiltStyles.textRow),
+    Text('Northwestern', style: NorthwesternStyles.textRow),
     Text('Other', style: VanderbiltStyles.textRow),
   ];
 

@@ -1,10 +1,9 @@
-import 'dart:typed_data';
+import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-
-import '../utilities/server.dart';
-import '../utilities/styles.dart';
+import 'package:musicly/utilities/styles.dart';
+import 'package:http/http.dart' as http;
+import 'dart:io';
 
 class ServerPage extends StatefulWidget {
   @override
@@ -12,193 +11,79 @@ class ServerPage extends StatefulWidget {
 }
 
 class _ServerPageState extends State<ServerPage> {
-  Server? server;
-  List<String> serverLogs = [];
-  TextEditingController controller = TextEditingController();
-
-  initState() {
-    super.initState();
-
-    server = Server(
-      onData: this.onData,
-      onError: this.onError,
-    );
-  }
-
-  onData(Uint8List data) {
-    DateTime time = DateTime.now();
-    serverLogs.add(time.hour.toString() + "h" + time.minute.toString() + " : " + String.fromCharCodes(data));
-    setState(() {});
-  }
-
-  onError(dynamic error) {
-    print(error);
-  }
-
-  dispose() {
-    controller.dispose();
-    server!.stop();
-    super.dispose();
-  }
-
-  confirmReturn() {
-    return showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: Text("ATTENTION"),
-          content: Text("Leaving this page will shut down the socket server"),
-          actions: <Widget>[
-            FlatButton(
-              child: Text("Quit", style: TextStyle(color: Colors.red)),
-              onPressed: () {
-                Navigator.of(context).pop();
-                Navigator.of(context).pop();
-              },
-            ),FlatButton(
-              child: Text("Cancel", style: TextStyle(color: Colors.grey)),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
+  String _songName = "Song Name";
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Server'),
-        titleTextStyle: TextStyle(color: Colors.black, fontSize: 22),
-        backgroundColor: VanderbiltStyles.gold,
-        centerTitle: true,
-        automaticallyImplyLeading: false,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: confirmReturn,
+    return CupertinoPageScaffold(
+        child: CustomScrollView(
+      physics: const NeverScrollableScrollPhysics(),
+      slivers: [
+        const CupertinoSliverNavigationBar(
+          largeTitle: Text(
+            'Change tune',
+            style: TextStyle(color: VanderbiltStyles.gold),
+          ),
+          previousPageTitle: "Home",
         ),
-      ),
-      body: Column(
-        children: <Widget>[
-          Expanded(
-            flex: 1,
-            child: Padding(
-              padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
-              child: Column(
-                children: <Widget>[
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Text(
-                        "Server",
-                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                      ),
-                      Container(
-                        decoration: BoxDecoration(
-                          color: server!.running ? Colors.green : Colors.red,
-                          borderRadius: BorderRadius.all(Radius.circular(3)),
-                        ),
-                        padding: EdgeInsets.all(5),
-                        child: Text(
-                          server!.running ? 'ON' : 'OFF',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ],
+        SliverFillRemaining(
+            child: Column(children: [
+          Padding(
+              padding: const EdgeInsets.only(
+                  left: 0, right: 0, top: 35.0, bottom: 0),
+              child: SizedBox(
+                width: 350,
+                child: CupertinoTextField(
+                  //controller: ,TODO: Text controllers for text field values
+                  placeholder: _songName,
+                  placeholderStyle: VanderbiltStyles.textRowPlaceholder,
+                  style: VanderbiltStyles.textRowPlaceholder,
+                  autocorrect: false,
+                  textAlign: TextAlign.center,
+                  padding: const EdgeInsets.only(
+                      left: 0.0, right: 0.0, top: 15.0, bottom: 15.0),
+                  decoration: BoxDecoration(
+                    color: CupertinoColors.white,
+                    borderRadius: BorderRadius.circular(25.0),
                   ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  RaisedButton(
-                    child: Text(server!.running ? 'Stop the server' : 'Start the server'),
-                    onPressed: () async {
-                      if (server!.running) {
-                        await server!.stop();
-                        this.serverLogs.clear();
-                      } else {
-                        await server!.start();
-                      }
-                      setState(() {});
-                    },
-                  ),
-                  Divider(
-                    height: 30,
-                    thickness: 1,
-                    color: Colors.black12,
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: ListView(
-                      children: serverLogs.map((String log) {
-                        return Padding(
-                          padding: EdgeInsets.only(top: 15),
-                          child: Text(log),
-                        ); 
-                      }).toList(),
-                    ),
-                  ),
-                ],
+                  onChanged: (text) {
+                    _songName = text;
+                  },
+                  onSubmitted: (text) {
+                    _songName = text;
+                  },
+                ),
+              )),
+          Padding(
+            padding: const EdgeInsets.only(
+                left: 30.0, right: 30.0, top: 25.0, bottom: 0),
+            child: CupertinoButton(
+              child: const Text(
+                'Submit',
+                style: VanderbiltStyles.textButton,
               ),
+              onPressed: () async {
+                submitSong(_songName);
+              },
+              borderRadius: BorderRadius.circular(25.0),
+              color: VanderbiltStyles.gold,
+              pressedOpacity: 0.75,
             ),
           ),
-          Container(
-            color: Colors.grey,
-            height: 80,
-            padding: EdgeInsets.all(10),
-            child: Row(
-              children: <Widget>[
-                Expanded(
-                  flex: 1,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        'Message to broadcast :',
-                        style: TextStyle(
-                          fontSize: 8,
-                        ),
-                      ),
-                      Expanded(
-                        flex: 1,
-                        child: TextFormField(
-                          controller: controller,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  width: 15,
-                ),
-                MaterialButton(
-                  onPressed: () {
-                    controller.text = "";
-                  },
-                  minWidth: 30,
-                  padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-                  child: Icon(Icons.clear),
-                ),
-                SizedBox(width: 15,),
-                MaterialButton(
-                  onPressed: () {
-                    server!.broadCast(controller.text);
-                    controller.text = "";
-                  },
-                  minWidth: 30,
-                  padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-                  child: Icon(Icons.send),
-                )
-              ],
-            ),
-          ),
-        ],
-      ),
+        ]))
+      ],
+    ));
+  }
+
+  Future<http.Response> submitSong(String title) {
+    return http.post(
+      Uri.parse('https://jsonplaceholder.typicode.com/albums'),
+      headers: <String, String>{
+        'User-type': 'Conductor',
+      },
+      body: jsonEncode(<String, String>{
+        'title': title,
+      }),
     );
   }
 }

@@ -36,4 +36,24 @@ abstract class VanderbiltStyles {
 abstract class NorthwesternStyles {
   // Official Northwestern Purple.
   static const Color purple = Color.fromRGBO(78, 42, 132, 1);
+
+  // Standardized placeholder text style.
+  static const TextStyle textRowPlaceholder = TextStyle(
+      color: CupertinoColors.systemGrey,
+      fontWeight: FontWeight.bold,
+      fontSize: 20
+  );
+
+  // Standardized text style.
+  static const TextStyle textRow = TextStyle(
+      color: CupertinoColors.black,
+      fontSize: 20
+  );
+
+  // Standardized button text style.
+  static const TextStyle textButton = TextStyle(
+    color: CupertinoColors.white,
+    fontSize: 25,
+    fontWeight: FontWeight.bold,
+  );
 }
