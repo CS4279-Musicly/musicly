@@ -3,6 +3,7 @@ import 'package:musicly/utilities/styles.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:musicly/views/account_view.dart';
 import 'tab_view.dart';
 import 'signup_view.dart';
 
@@ -107,6 +108,10 @@ class _LoginViewState extends State<LoginView> {
         return alert;
       },
     );
+  }
+
+  _pickUniversityColors() async{
+    bool col = true;
   }
 
   Widget _buildButton() {
