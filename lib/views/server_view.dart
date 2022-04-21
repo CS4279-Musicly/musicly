@@ -17,6 +17,9 @@ class ServerPage extends StatefulWidget {
 
 class _ServerPageState extends State<ServerPage> {
   String _songName = "Song Name";
+  final _channel = WebSocketChannel.connect(
+    Uri.parse('wss://demo.piesocket.com/v3/channel_1?api_key=oCdCMcMPQpbvNjUIzqtvF1d2X2okWpDQj4AwARJuAgtjhzKxVEjQU6IdCjwm&notify_self'),
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -68,8 +71,7 @@ class _ServerPageState extends State<ServerPage> {
                 style: VanderbiltStyles.textButton,
               ),
               onPressed: () async {
-                //submitSong(_songName);
-                connectToServer(_songName);
+                submitSong(_songName);
               },
               borderRadius: BorderRadius.circular(25.0),
               color: VanderbiltStyles.gold,
@@ -81,20 +83,15 @@ class _ServerPageState extends State<ServerPage> {
     ));
   }
 
-  Future<http.Response> submitSong(String title) {
-    return http.post(
-      Uri.parse('https://jsonplaceholder.typicode.com/albums'),
-      headers: <String, String>{
-        'User-type': 'Conductor',
-      },
-      body: jsonEncode(<String, String>{
-        'title': title,
-      }),
-    );
+  void submitSong(String title) {
+    if(title.isNotEmpty) { //TODO: Add a database check here
+      _channel.sink.add(title);
+    }
   }
 
-  void connectToServer(String title) {
-    channel.sink.add(title);
-    channel.sink.close();
+  @override
+  void dispose() {
+    _channel.sink.close();
+    super.dispose();
   }
 }
