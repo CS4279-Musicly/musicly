@@ -3,7 +3,12 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:musicly/utilities/styles.dart';
 import 'package:http/http.dart' as http;
-import 'dart:io';
+import 'package:web_socket_channel/web_socket_channel.dart';
+import 'package:web_socket_channel/status.dart' as status;
+
+final channel = WebSocketChannel.connect(
+  Uri.parse('wss://echo.websocket.events'),
+);
 
 class ServerPage extends StatefulWidget {
   @override
@@ -63,7 +68,8 @@ class _ServerPageState extends State<ServerPage> {
                 style: VanderbiltStyles.textButton,
               ),
               onPressed: () async {
-                submitSong(_songName);
+                //submitSong(_songName);
+                connectToServer(_songName);
               },
               borderRadius: BorderRadius.circular(25.0),
               color: VanderbiltStyles.gold,
@@ -85,5 +91,10 @@ class _ServerPageState extends State<ServerPage> {
         'title': title,
       }),
     );
+  }
+
+  void connectToServer(String title) {
+    channel.sink.add(title);
+    channel.sink.close();
   }
 }
