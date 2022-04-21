@@ -91,7 +91,7 @@ class _HomeViewState extends State<HomeView> {
               width: 370,
               child: CupertinoButton(
                 child: const Text(
-                  'Open Client View',
+                  'Connect to Live Changes',
                   style: VanderbiltStyles.textButton,
                 ),
                 onPressed: () {
@@ -110,7 +110,7 @@ class _HomeViewState extends State<HomeView> {
               width: 370,
               child: CupertinoButton(
                 child: const Text(
-                  'Open Server View',
+                  'Conductor Music Change',
                   style: VanderbiltStyles.textButton,
                 ),
                 onPressed: () {
