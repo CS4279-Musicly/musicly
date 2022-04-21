@@ -60,7 +60,7 @@ class _LoginViewState extends State<LoginView> {
       _validated = false;
     }
 
-    if (_email == "ethan.h.mayer@vanderbilt.edu") {
+    if (_email == "JustinCarway@gmail.com") {
       _conductor = true;
     }
 
