@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
+import 'package:flutter/cupertino.dart';
 
 import '../utilities/styles.dart';
 
@@ -22,19 +23,20 @@ class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Document"),
-          titleTextStyle: TextStyle(color: Colors.black, fontSize: 22),
-          backgroundColor: VanderbiltStyles.gold,
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(Icons.share),
-            onPressed: () {},
+    return CupertinoPageScaffold(
+      child: CustomScrollView(
+        physics: const NeverScrollableScrollPhysics(),
+        slivers: [
+          // Navigation bar at the top of the screen that contains the view title and navigation buttons.
+          const CupertinoSliverNavigationBar(
+            largeTitle: Text(
+              'Music',
+              style: TextStyle(color: VanderbiltStyles.gold),
+            ),
+            previousPageTitle: "Back",
           ),
-        ],
-      ),
-      body: Stack(
+          SliverFillRemaining(
+            child: Stack(
         children: <Widget>[
           PDFView(
             filePath: widget.path,
@@ -86,20 +88,48 @@ class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
           )
         ],
       ),
-      floatingActionButton: FutureBuilder<PDFViewController>(
-        future: _controller.future,
-        builder: (context, AsyncSnapshot<PDFViewController> snapshot) {
-          if (snapshot.hasData) {
-            return FloatingActionButton.extended(
-              label: Text("Go to ${pages! ~/ 2}"),
-              onPressed: () async {
-                await snapshot.data!.setPage(pages! ~/ 2);
-              },
-            );
-          }
-          return Container();
-        },
-      ),
+    )
+    ]
+    )
     );
   }
 }
+
+
+
+
+
+
+
+
+
+      // appBar: AppBar(
+      //   title: const Text("Document"),
+      //     titleTextStyle: TextStyle(color: Colors.black, fontSize: 22),
+      //     backgroundColor: VanderbiltStyles.gold,
+      //   actions: <Widget>[
+      //     IconButton(
+      //       icon: const Icon(Icons.share),
+      //       onPressed: () {
+      //         Navigator.pop(context);
+      //       },
+      //     ),
+      //   ],
+      // ),
+        //...
+    //stack
+    //...
+      // floatingActionButton: FutureBuilder<PDFViewController>(
+      //   future: _controller.future,
+      //   builder: (context, AsyncSnapshot<PDFViewController> snapshot) {
+      //     if (snapshot.hasData) {
+      //       return FloatingActionButton.extended(
+      //         label: Text("Go to ${pages! ~/ 2}"),
+      //         onPressed: () async {
+      //           await snapshot.data!.setPage(pages! ~/ 2);
+      //         },
+      //       );
+      //     }
+      //     return Container();
+      //   },
+      // ),
