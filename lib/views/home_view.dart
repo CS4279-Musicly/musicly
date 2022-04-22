@@ -55,81 +55,61 @@ class _HomeViewState extends State<HomeView> {
                   expand: true,
                   duration: const Duration(milliseconds: 300),
                   builder: (_) => AccountView(conductor: conductor));
-            }
-        ),
+            }),
       );
     }
   }
 
   Column _buildColumn(BuildContext context) {
     if (conductor) {
-      return Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(
-                left: 0, right: 0, top: 35.0, bottom: 0),
-            child: SizedBox(
-              width: 370,
-              child: CupertinoButton(
-                child: const Text(
-                  'Add New Sheet Music',
-                  style: VanderbiltStyles.textButton,
-                ),
-                onPressed: () {
-                  Navigator.push(context, CupertinoPageRoute(builder: (context) => AddMusicView()));
-                },
-                borderRadius: BorderRadius.circular(25.0),
-                color: VanderbiltStyles.gold,
-                pressedOpacity: 0.75,
+      return Column(children: [
+        Padding(
+          padding:
+              const EdgeInsets.only(left: 0, right: 0, top: 35.0, bottom: 0),
+          child: SizedBox(
+            width: 370,
+            child: CupertinoButton(
+              child: const Text(
+                'Add New Sheet Music',
+                style: VanderbiltStyles.textButton,
               ),
+              onPressed: () {
+                Navigator.push(context,
+                    CupertinoPageRoute(builder: (context) => AddMusicView()));
+              },
+              borderRadius: BorderRadius.circular(25.0),
+              color: VanderbiltStyles.gold,
+              pressedOpacity: 0.75,
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(
-                left: 0, right: 0, top: 35.0, bottom: 0),
-            child: SizedBox(
-              width: 370,
-              child: CupertinoButton(
-                child: const Text(
-                  'Open Client View',
-                  style: VanderbiltStyles.textButton,
-                ),
-                onPressed: () {
-                  Navigator.push(context, CupertinoPageRoute(builder: (context) => ClientPage()));
-                },
-                borderRadius: BorderRadius.circular(25.0),
-                color: VanderbiltStyles.gold,
-                pressedOpacity: 0.75,
+        ),
+        Padding(
+          padding:
+              const EdgeInsets.only(left: 0, right: 0, top: 35.0, bottom: 0),
+          child: SizedBox(
+            width: 370,
+            child: CupertinoButton(
+              child: const Text(
+                'Conductor Music Change',
+                style: VanderbiltStyles.textButton,
               ),
+              onPressed: () {
+                Navigator.push(context,
+                    CupertinoPageRoute(builder: (context) => ServerPage()));
+              },
+              borderRadius: BorderRadius.circular(25.0),
+              color: VanderbiltStyles.gold,
+              pressedOpacity: 0.75,
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(
-                left: 0, right: 0, top: 35.0, bottom: 0),
-            child: SizedBox(
-              width: 370,
-              child: CupertinoButton(
-                child: const Text(
-                  'Open Server View',
-                  style: VanderbiltStyles.textButton,
-                ),
-                onPressed: () {
-                  Navigator.push(context, CupertinoPageRoute(builder: (context) => ServerPage()));
-                },
-                borderRadius: BorderRadius.circular(25.0),
-                color: VanderbiltStyles.gold,
-                pressedOpacity: 0.75,
-              ),
-            ),
-          )
-        ]
-      );
+        )
+      ]);
     } else {
       return Column(
         children: [
           Padding(
-            padding: const EdgeInsets.only(
-                left: 0, right: 0, top: 35.0, bottom: 0),
+            padding:
+                const EdgeInsets.only(left: 0, right: 0, top: 35.0, bottom: 0),
             child: SizedBox(
               width: 370,
               child: CupertinoButton(
@@ -138,7 +118,10 @@ class _HomeViewState extends State<HomeView> {
                   style: VanderbiltStyles.textButton,
                 ),
                 onPressed: () {
-                  Navigator.push(context, CupertinoPageRoute(builder: (context) => DownloadMusicView()));
+                  Navigator.push(
+                      context,
+                      CupertinoPageRoute(
+                          builder: (context) => DownloadMusicView()));
                   //FirebaseFiles().downloadFile(context);
                 },
                 borderRadius: BorderRadius.circular(25.0),
@@ -148,8 +131,8 @@ class _HomeViewState extends State<HomeView> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(
-                left: 0, right: 0, top: 35.0, bottom: 0),
+            padding:
+                const EdgeInsets.only(left: 0, right: 0, top: 35.0, bottom: 0),
             child: SizedBox(
               width: 370,
               child: CupertinoButton(
@@ -158,7 +141,10 @@ class _HomeViewState extends State<HomeView> {
                   style: VanderbiltStyles.textButton,
                 ),
                 onPressed: () {
-                  Navigator.push(context, CupertinoPageRoute(builder: (context) => DownloadDrillView()));
+                  Navigator.push(
+                      context,
+                      CupertinoPageRoute(
+                          builder: (context) => DownloadDrillView()));
                   //FirebaseFiles().downloadFile(context);
                 },
                 borderRadius: BorderRadius.circular(25.0),
@@ -167,6 +153,26 @@ class _HomeViewState extends State<HomeView> {
               ),
             ),
           ),
+          Padding(
+            padding:
+                const EdgeInsets.only(left: 0, right: 0, top: 35.0, bottom: 0),
+            child: SizedBox(
+              width: 370,
+              child: CupertinoButton(
+                child: const Text(
+                  'Connect to Live Changes',
+                  style: VanderbiltStyles.textButton,
+                ),
+                onPressed: () {
+                  Navigator.push(context,
+                      CupertinoPageRoute(builder: (context) => ClientPage()));
+                },
+                borderRadius: BorderRadius.circular(25.0),
+                color: VanderbiltStyles.gold,
+                pressedOpacity: 0.75,
+              ),
+            ),
+          )
         ],
       );
     }
@@ -177,15 +183,12 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
         child: CustomScrollView(
-          physics: const NeverScrollableScrollPhysics(),
-          slivers: <Widget>[
-            // Navigation bar at the top of the screen that contains the view title and navigation buttons.
-            _buildBar(context),
-            SliverFillRemaining(
-              child: _buildColumn(context)
-            )
-          ],
-        )
-    );
+      physics: const NeverScrollableScrollPhysics(),
+      slivers: <Widget>[
+        // Navigation bar at the top of the screen that contains the view title and navigation buttons.
+        _buildBar(context),
+        SliverFillRemaining(child: _buildColumn(context))
+      ],
+    ));
   }
 }
