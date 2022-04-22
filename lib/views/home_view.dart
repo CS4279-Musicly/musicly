@@ -24,6 +24,7 @@ class _HomeViewState extends State<HomeView> {
   _HomeViewState(this.conductor);
   final bool conductor;
   String _university = "Vanderbilt";
+  late SharedPreferences prefs;
 
   @override
   initState() {
@@ -32,7 +33,13 @@ class _HomeViewState extends State<HomeView> {
   }
 
   _setup() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _university = prefs.getString('university') ?? "Vanderbilt";
+    });
+  }
+
+  _refresh() async {
     setState(() {
       _university = prefs.getString('university') ?? "Vanderbilt";
     });
@@ -54,6 +61,13 @@ class _HomeViewState extends State<HomeView> {
           'Home: Student',
           style: TextStyle(color: _university == "Vanderbilt" ? VanderbiltStyles.gold : NorthwesternStyles.purple),
         ),
+        leading: CupertinoButton(
+            child: const Icon(CupertinoIcons.refresh),
+            padding: const EdgeInsets.all(10),
+            // Navigates to Account View when pressed.
+            onPressed: () {
+              _refresh();
+            }),
         // Right nav bar button, navigates to Account view.
         trailing: CupertinoButton(
             child: const Icon(CupertinoIcons.person),
