@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:musicly/utilities/styles.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'add_music_view.dart';
 import 'account_view.dart';
 import 'download_music_view.dart';
@@ -22,27 +23,36 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   _HomeViewState(this.conductor);
   final bool conductor;
+  String _university = "Vanderbilt";
 
   @override
   initState() {
     super.initState();
+    _setup();
+  }
+
+  _setup() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _university = prefs.getString('university') ?? "Vanderbilt";
+    });
   }
 
   CupertinoSliverNavigationBar _buildBar(BuildContext context) {
     if (conductor) {
-      return const CupertinoSliverNavigationBar(
+      return CupertinoSliverNavigationBar(
         automaticallyImplyLeading: false,
         largeTitle: Text(
           'Home: Conductor',
-          style: TextStyle(color: VanderbiltStyles.gold),
+          style: TextStyle(color: _university == "Vanderbilt" ? VanderbiltStyles.gold : NorthwesternStyles.purple),
         ),
       );
     } else {
       return CupertinoSliverNavigationBar(
         automaticallyImplyLeading: false,
-        largeTitle: const Text(
+        largeTitle: Text(
           'Home: Student',
-          style: TextStyle(color: VanderbiltStyles.gold),
+          style: TextStyle(color: _university == "Vanderbilt" ? VanderbiltStyles.gold : NorthwesternStyles.purple),
         ),
         // Right nav bar button, navigates to Account view.
         trailing: CupertinoButton(
@@ -69,16 +79,16 @@ class _HomeViewState extends State<HomeView> {
           child: SizedBox(
             width: 370,
             child: CupertinoButton(
-              child: const Text(
+              child: Text(
                 'Add New Sheet Music',
-                style: VanderbiltStyles.textButton,
+                style: _university == "Vanderbilt" ? VanderbiltStyles.textButton : NorthwesternStyles.textButton,
               ),
               onPressed: () {
                 Navigator.push(context,
                     CupertinoPageRoute(builder: (context) => AddMusicView()));
               },
               borderRadius: BorderRadius.circular(25.0),
-              color: VanderbiltStyles.gold,
+              color: _university == "Vanderbilt" ? VanderbiltStyles.gold : NorthwesternStyles.purple,
               pressedOpacity: 0.75,
             ),
           ),
@@ -89,16 +99,16 @@ class _HomeViewState extends State<HomeView> {
           child: SizedBox(
             width: 370,
             child: CupertinoButton(
-              child: const Text(
+              child: Text(
                 'Conductor Music Change',
-                style: VanderbiltStyles.textButton,
+                style: _university == "Vanderbilt" ? VanderbiltStyles.textButton : NorthwesternStyles.textButton,
               ),
               onPressed: () {
                 Navigator.push(context,
                     CupertinoPageRoute(builder: (context) => ServerPage()));
               },
               borderRadius: BorderRadius.circular(25.0),
-              color: VanderbiltStyles.gold,
+              color: _university == "Vanderbilt" ? VanderbiltStyles.gold : NorthwesternStyles.purple,
               pressedOpacity: 0.75,
             ),
           ),
@@ -113,9 +123,9 @@ class _HomeViewState extends State<HomeView> {
             child: SizedBox(
               width: 370,
               child: CupertinoButton(
-                child: const Text(
+                child: Text(
                   'Download New Music',
-                  style: VanderbiltStyles.textButton,
+                  style: _university == "Vanderbilt" ? VanderbiltStyles.textButton : NorthwesternStyles.textButton,
                 ),
                 onPressed: () {
                   Navigator.push(
@@ -125,7 +135,7 @@ class _HomeViewState extends State<HomeView> {
                   //FirebaseFiles().downloadFile(context);
                 },
                 borderRadius: BorderRadius.circular(25.0),
-                color: VanderbiltStyles.gold,
+                color: _university == "Vanderbilt" ? VanderbiltStyles.gold : NorthwesternStyles.purple,
                 pressedOpacity: 0.75,
               ),
             ),
@@ -136,9 +146,9 @@ class _HomeViewState extends State<HomeView> {
             child: SizedBox(
               width: 370,
               child: CupertinoButton(
-                child: const Text(
+                child: Text(
                   'Download New Drill',
-                  style: VanderbiltStyles.textButton,
+                  style: _university == "Vanderbilt" ? VanderbiltStyles.textButton : NorthwesternStyles.textButton,
                 ),
                 onPressed: () {
                   Navigator.push(
@@ -148,7 +158,7 @@ class _HomeViewState extends State<HomeView> {
                   //FirebaseFiles().downloadFile(context);
                 },
                 borderRadius: BorderRadius.circular(25.0),
-                color: VanderbiltStyles.gold,
+                color: _university == "Vanderbilt" ? VanderbiltStyles.gold : NorthwesternStyles.purple,
                 pressedOpacity: 0.75,
               ),
             ),
@@ -159,16 +169,16 @@ class _HomeViewState extends State<HomeView> {
             child: SizedBox(
               width: 370,
               child: CupertinoButton(
-                child: const Text(
+                child: Text(
                   'Connect to Live Changes',
-                  style: VanderbiltStyles.textButton,
+                  style: _university == "Vanderbilt" ? VanderbiltStyles.textButton : NorthwesternStyles.textButton,
                 ),
                 onPressed: () {
                   Navigator.push(context,
                       CupertinoPageRoute(builder: (context) => ClientPage()));
                 },
                 borderRadius: BorderRadius.circular(25.0),
-                color: VanderbiltStyles.gold,
+                color: _university == "Vanderbilt" ? VanderbiltStyles.gold : NorthwesternStyles.purple,
                 pressedOpacity: 0.75,
               ),
             ),
