@@ -23,6 +23,7 @@ class _LoginViewState extends State<LoginView> {
   String _email = "";
   bool _firstLaunch = false; // First time launching the app?
   bool _conductor = false;
+  String _university = "Vanderbilt";
 
   FirebaseAuth auth = FirebaseAuth.instance;
 
@@ -38,9 +39,11 @@ class _LoginViewState extends State<LoginView> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     _firstLaunch = prefs.getBool('firstLaunch') ?? true;
+    _university = prefs.getString('university') ?? "Vanderbilt";
     if (_firstLaunch) {
       prefs.setBool('firstLaunch', false);
     }
+    prefs.setString('university', _university);
   }
 
   /// Validate password when submitted to determine which view to load.
