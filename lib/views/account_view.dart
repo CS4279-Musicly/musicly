@@ -33,14 +33,8 @@ class _AccountViewState extends State<AccountView> {
 
   // List of universities that can participate in the marching band.
   final List<Text> _universityList = const [
-    Text('Belmont', style: VanderbiltStyles.textRow),
-    Text('Lipscomb', style: VanderbiltStyles.textRow),
-    Text('Trevecca', style: VanderbiltStyles.textRow),
-    Text('Nashville Tech', style: VanderbiltStyles.textRow),
     Text('Vanderbilt', style: VanderbiltStyles.textRow),
-    Text('Vol. State', style: VanderbiltStyles.textRow),
     Text('Northwestern', style: NorthwesternStyles.textRow),
-    Text('Other', style: VanderbiltStyles.textRow),
   ];
 
   // List of instruments in the marching band.
@@ -155,124 +149,246 @@ class _AccountViewState extends State<AccountView> {
   }
 
   List<Widget> _buildCommon(BuildContext context) {
-    if (_conductor) {
-      return <Widget>[
-        // Create the Star V image login page.
-        Padding(
-          padding: const EdgeInsets.only(top: 90.0),
-          child: Center(
-            child: SizedBox(
-                width: 200,
-                height: 150,
-                child: Image.asset('assets/images/starV_873.png')),
-          ),
-        ),
-        // Create the name text field.
-        Padding(
-            padding: const EdgeInsets.only(
-                left: 0, right: 0, top: 50.0, bottom: 0),
-            child: SizedBox(
-              width: 350,
-              child: CupertinoTextField(
-                controller: _nameController,
-                placeholder: "Name",
-                placeholderStyle: VanderbiltStyles.textRowPlaceholder,
-                style: VanderbiltStyles.textRowPlaceholder,
-                textAlign: TextAlign.center,
-                padding: const EdgeInsets.only(
-                    left: 0.0, right: 0.0, top: 15.0, bottom: 15.0),
-                decoration: BoxDecoration(
-                  color: CupertinoColors.white,
-                  borderRadius: BorderRadius.circular(25.0),
-                ),
-                onSubmitted: (text) {
-                  _name = text;
-                  _updateName();
-                },
-              ),
-            )
-        ),
-      ];
-    } else {
-      return <Widget>[
-        // Create the Star V image login page.
-        Padding(
-          padding: const EdgeInsets.only(top: 90.0),
-          child: Center(
-            child: SizedBox(
-                width: 200,
-                height: 150,
-                child: Image.asset('assets/images/starV_873.png')),
-          ),
-        ),
-        // Create the name text field.
-        Padding(
-            padding: const EdgeInsets.only(
-                left: 0, right: 0, top: 50.0, bottom: 0),
-            child: SizedBox(
-              width: 350,
-              child: CupertinoTextField(
-                controller: _nameController,
-                placeholder: "Name",
-                placeholderStyle: VanderbiltStyles.textRowPlaceholder,
-                style: VanderbiltStyles.textRowPlaceholder,
-                textAlign: TextAlign.center,
-                padding: const EdgeInsets.only(
-                    left: 0.0, right: 0.0, top: 15.0, bottom: 15.0),
-                decoration: BoxDecoration(
-                  color: CupertinoColors.white,
-                  borderRadius: BorderRadius.circular(25.0),
-                ),
-                onSubmitted: (text) {
-                  _name = text;
-                  _updateName();
-                },
-              ),
-            )
-        ),
-        // Create the university text field/picker.
-        Padding(
-            padding: const EdgeInsets.only(
-                left: 0, right: 0, top: 25.0, bottom: 0),
-            child: SizedBox(
-              width: 350,
-              child: CupertinoButton(
-                child: Text(
-                  _university,
-                  style: VanderbiltStyles.textRowPlaceholder,
-                ),
-                borderRadius: BorderRadius.circular(25.0),
-                color: CupertinoColors.white,
-                onPressed: () {
-                  _showUniversityPicker();
-                },
-              ),
-            )
-        ),
-        // Create the instrument text field/picker.
-        Padding(
-            padding: const EdgeInsets.only(
-                left: 30.0,
-                right: 30.0,
-                top: 25.0,
-                bottom: 0
+    if(_university != 'Vanderbilt'){
+      if (_conductor) {
+        return <Widget>[
+          // Create the Star V image login page.
+          Padding(
+            padding: const EdgeInsets.only(top: 90.0),
+            child: Center(
+              child: SizedBox(
+                  width: 200,
+                  height: 150,
+                  child: Image.asset('assets/images/starV_873.png')),
             ),
-            child: SizedBox(
-              width: 350,
-              child: CupertinoButton(
-                child: Text(
-                  _instrument,
+          ),
+          // Create the name text field.
+          Padding(
+              padding: const EdgeInsets.only(
+                  left: 0, right: 0, top: 50.0, bottom: 0),
+              child: SizedBox(
+                width: 350,
+                child: CupertinoTextField(
+                  controller: _nameController,
+                  placeholder: "Name",
+                  placeholderStyle: VanderbiltStyles.textRowPlaceholder,
                   style: VanderbiltStyles.textRowPlaceholder,
+                  textAlign: TextAlign.center,
+                  padding: const EdgeInsets.only(
+                      left: 0.0, right: 0.0, top: 15.0, bottom: 15.0),
+                  decoration: BoxDecoration(
+                    color: CupertinoColors.white,
+                    borderRadius: BorderRadius.circular(25.0),
+                  ),
+                  onSubmitted: (text) {
+                    _name = text;
+                    _updateName();
+                  },
                 ),
-                borderRadius: BorderRadius.circular(25.0),
-                color: CupertinoColors.white,
-                onPressed: () {
-                  _showInstrumentPicker();
-                },
+              )
+          ),
+        ];
+      } else {
+        return <Widget>[
+          // Create the Star V image login page.
+          Padding(
+            padding: const EdgeInsets.only(top: 90.0),
+            child: Center(
+              child: SizedBox(
+                  width: 200,
+                  height: 150,
+                  child: Image.asset('assets/images/northwestern_logo.png')),
+            ),
+          ),
+          // Create the name text field.
+          Padding(
+              padding: const EdgeInsets.only(
+                  left: 0, right: 0, top: 50.0, bottom: 0),
+              child: SizedBox(
+                width: 350,
+                child: CupertinoTextField(
+                  controller: _nameController,
+                  placeholder: "Name",
+                  placeholderStyle: VanderbiltStyles.textRowPlaceholder,
+                  style: VanderbiltStyles.textRowPlaceholder,
+                  textAlign: TextAlign.center,
+                  padding: const EdgeInsets.only(
+                      left: 0.0, right: 0.0, top: 15.0, bottom: 15.0),
+                  decoration: BoxDecoration(
+                    color: CupertinoColors.white,
+                    borderRadius: BorderRadius.circular(25.0),
+                  ),
+                  onSubmitted: (text) {
+                    _name = text;
+                    _updateName();
+                  },
+                ),
+              )
+          ),
+          // Create the university text field/picker.
+          Padding(
+              padding: const EdgeInsets.only(
+                  left: 0, right: 0, top: 25.0, bottom: 0),
+              child: SizedBox(
+                width: 350,
+                child: CupertinoButton(
+                  child: Text(
+                    _university,
+                    style: VanderbiltStyles.textRowPlaceholder,
+                  ),
+                  borderRadius: BorderRadius.circular(25.0),
+                  color: CupertinoColors.white,
+                  onPressed: () {
+                    _showUniversityPicker();
+                  },
+                ),
+              )
+          ),
+          // Create the instrument text field/picker.
+          Padding(
+              padding: const EdgeInsets.only(
+                  left: 30.0,
+                  right: 30.0,
+                  top: 25.0,
+                  bottom: 0
               ),
-            )
-        ),
-      ];
+              child: SizedBox(
+                width: 350,
+                child: CupertinoButton(
+                  child: Text(
+                    _instrument,
+                    style: VanderbiltStyles.textRowPlaceholder,
+                  ),
+                  borderRadius: BorderRadius.circular(25.0),
+                  color: CupertinoColors.white,
+                  onPressed: () {
+                    _showInstrumentPicker();
+                  },
+                ),
+              )
+          ),
+        ];
+      }
+    } else {
+      if (_conductor) {
+        return <Widget>[
+          // Create the Star V image login page.
+          Padding(
+            padding: const EdgeInsets.only(top: 90.0),
+            child: Center(
+              child: SizedBox(
+                  width: 200,
+                  height: 150,
+                  child: Image.asset('assets/images/starV_873.png')),
+            ),
+          ),
+          // Create the name text field.
+          Padding(
+              padding: const EdgeInsets.only(
+                  left: 0, right: 0, top: 50.0, bottom: 0),
+              child: SizedBox(
+                width: 350,
+                child: CupertinoTextField(
+                  controller: _nameController,
+                  placeholder: "Name",
+                  placeholderStyle: VanderbiltStyles.textRowPlaceholder,
+                  style: VanderbiltStyles.textRowPlaceholder,
+                  textAlign: TextAlign.center,
+                  padding: const EdgeInsets.only(
+                      left: 0.0, right: 0.0, top: 15.0, bottom: 15.0),
+                  decoration: BoxDecoration(
+                    color: CupertinoColors.white,
+                    borderRadius: BorderRadius.circular(25.0),
+                  ),
+                  onSubmitted: (text) {
+                    _name = text;
+                    _updateName();
+                  },
+                ),
+              )
+          ),
+        ];
+      } else {
+        return <Widget>[
+          // Create the Star V image login page.
+          Padding(
+            padding: const EdgeInsets.only(top: 90.0),
+            child: Center(
+              child: SizedBox(
+                  width: 200,
+                  height: 150,
+                  child: Image.asset('assets/images/starV_873.png')),
+            ),
+          ),
+          // Create the name text field.
+          Padding(
+              padding: const EdgeInsets.only(
+                  left: 0, right: 0, top: 50.0, bottom: 0),
+              child: SizedBox(
+                width: 350,
+                child: CupertinoTextField(
+                  controller: _nameController,
+                  placeholder: "Name",
+                  placeholderStyle: NorthwesternStyles.textRowPlaceholder,
+                  style: NorthwesternStyles.textRowPlaceholder,
+                  textAlign: TextAlign.center,
+                  padding: const EdgeInsets.only(
+                      left: 0.0, right: 0.0, top: 15.0, bottom: 15.0),
+                  decoration: BoxDecoration(
+                    color: CupertinoColors.white,
+                    borderRadius: BorderRadius.circular(25.0),
+                  ),
+                  onSubmitted: (text) {
+                    _name = text;
+                    _updateName();
+                  },
+                ),
+              )
+          ),
+          // Create the university text field/picker.
+          Padding(
+              padding: const EdgeInsets.only(
+                  left: 0, right: 0, top: 25.0, bottom: 0),
+              child: SizedBox(
+                width: 350,
+                child: CupertinoButton(
+                  child: Text(
+                    _university,
+                    style: NorthwesternStyles.textRowPlaceholder,
+                  ),
+                  borderRadius: BorderRadius.circular(25.0),
+                  color: CupertinoColors.white,
+                  onPressed: () {
+                    _showUniversityPicker();
+                  },
+                ),
+              )
+          ),
+          // Create the instrument text field/picker.
+          Padding(
+              padding: const EdgeInsets.only(
+                  left: 30.0,
+                  right: 30.0,
+                  top: 25.0,
+                  bottom: 0
+              ),
+              child: SizedBox(
+                width: 350,
+                child: CupertinoButton(
+                  child: Text(
+                    _instrument,
+                    style: NorthwesternStyles.textRowPlaceholder,
+                  ),
+                  borderRadius: BorderRadius.circular(25.0),
+                  color: CupertinoColors.white,
+                  onPressed: () {
+                    _showInstrumentPicker();
+                  },
+                ),
+              )
+          ),
+        ];
+      }
     }
   }
 
