@@ -46,19 +46,16 @@ class _HomeViewState extends State<HomeView> {
   }
 
   CupertinoSliverNavigationBar _buildBar(BuildContext context) {
+    String title = "";
     if (conductor) {
-      return CupertinoSliverNavigationBar(
-        automaticallyImplyLeading: false,
-        largeTitle: Text(
-          'Home: Conductor',
-          style: TextStyle(color: _university == "Vanderbilt" ? VanderbiltStyles.gold : NorthwesternStyles.purple),
-        ),
-      );
+      title = "Home: Conductor";
     } else {
+      title = "Home: Student";
+    }
       return CupertinoSliverNavigationBar(
         automaticallyImplyLeading: false,
         largeTitle: Text(
-          'Home: Student',
+          title,
           style: TextStyle(color: _university == "Vanderbilt" ? VanderbiltStyles.gold : NorthwesternStyles.purple),
         ),
         leading: CupertinoButton(
@@ -81,7 +78,6 @@ class _HomeViewState extends State<HomeView> {
                   builder: (_) => AccountView(conductor: conductor));
             }),
       );
-    }
   }
 
   Column _buildColumn(BuildContext context) {
