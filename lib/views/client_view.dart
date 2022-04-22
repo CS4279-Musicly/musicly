@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:musicly/views/pdf_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:musicly/utilities/styles.dart';
 
 class ClientPage extends StatefulWidget {
   final String title = "Test";
@@ -57,27 +58,37 @@ class _ClientPageState extends State<ClientPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            StreamBuilder(
-              stream: _channel.stream,
-              builder: (context, snapshot) {
-                _fileName = snapshot.data.toString();
-                openPDF();
-                return Text(snapshot.hasData ? '${snapshot.data}' : '');
-              },
-            )
-          ],
-        ),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
-    );
+    return CupertinoPageScaffold(
+        child: CustomScrollView(
+            physics: const NeverScrollableScrollPhysics(),
+            slivers: <Widget>[
+              const CupertinoSliverNavigationBar(
+                largeTitle: Text(
+                    'Music Reception',
+                style: TextStyle(color: VanderbiltStyles.gold)
+                )
+              ),
+              const SliverPadding(
+                    padding: EdgeInsets.all(20.0),
+              ),
+              SliverFillRemaining(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        StreamBuilder(
+                          stream: _channel.stream,
+                          builder: (context, snapshot) {
+                            _fileName = snapshot.data.toString();
+                            openPDF();
+                            return Text("   Waiting for director...");
+                          },
+                        )
+                      ],
+                    ),
+                  ),
+            ]
+        )
+      );
   }
 
   @override
